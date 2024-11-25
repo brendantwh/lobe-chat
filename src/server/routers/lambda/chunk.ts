@@ -108,7 +108,7 @@ export const chunkRouter = router({
     .mutation(async ({ ctx, input }) => {
       console.time('embedding');
       const agentRuntime = await initAgentRuntimeWithUserPayload(
-        ModelProvider.OpenAI,
+        ModelProvider.Github,
         ctx.jwtPayload,
       );
 
@@ -137,7 +137,7 @@ export const chunkRouter = router({
       if (!item || !item.embeddings) {
         // TODO: need to support customize
         const agentRuntime = await initAgentRuntimeWithUserPayload(
-          ModelProvider.OpenAI,
+          ModelProvider.Github,
           ctx.jwtPayload,
         );
 

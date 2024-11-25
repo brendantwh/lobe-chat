@@ -88,7 +88,7 @@ export const fileRouter = router({
               requestArray,
               async (chunks, index) => {
                 const agentRuntime = await initAgentRuntimeWithUserPayload(
-                  ModelProvider.OpenAI,
+                  ModelProvider.Github,
                   ctx.jwtPayload,
                 );
 
