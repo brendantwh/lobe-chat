@@ -24,6 +24,7 @@ import { LobeMistralAI } from './mistral';
 import { LobeMoonshotAI } from './moonshot';
 import { LobeNovitaAI } from './novita';
 import { LobeOllamaAI } from './ollama';
+import { LobeOAICompatible } from './oaicompatible';
 import { LobeOpenAI } from './openai';
 import { LobeOpenRouterAI } from './openrouter';
 import { LobePerplexityAI } from './perplexity';
@@ -150,6 +151,7 @@ class AgentRuntime {
       moonshot: Partial<ClientOptions>;
       novita: Partial<ClientOptions>;
       ollama: Partial<ClientOptions>;
+      oaicompatible: Partial<ClientOptions>;
       openai: Partial<ClientOptions>;
       openrouter: Partial<ClientOptions>;
       perplexity: Partial<ClientOptions>;
@@ -173,6 +175,11 @@ class AgentRuntime {
       case ModelProvider.OpenAI: {
         // Will use the openai as default provider
         runtimeModel = new LobeOpenAI(params.openai ?? (params as any)[provider]);
+        break;
+      }
+      
+      case ModelProvider.OAICompatible: {
+        runtimeModel = new LobeOAICompatible(params.oaicompatible ?? (params as any)[provider]);
         break;
       }
 

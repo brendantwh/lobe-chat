@@ -21,6 +21,7 @@ import MistralProvider from './mistral';
 import MoonshotProvider from './moonshot';
 import NovitaProvider from './novita';
 import OllamaProvider from './ollama';
+import OAICompatibleProvider from './oaicompatible';
 import OpenAIProvider from './openai';
 import OpenRouterProvider from './openrouter';
 import PerplexityProvider from './perplexity';
@@ -73,6 +74,7 @@ export const LOBE_DEFAULT_MODEL_LIST: ChatModelCard[] = [
   WenxinProvider.chatModels,
   SenseNovaProvider.chatModels,
   InternLMProvider.chatModels,
+  OAICompatibleProvider.chatModels,
 ].flat();
 
 export const DEFAULT_MODEL_PROVIDER_LIST = [
@@ -112,6 +114,7 @@ export const DEFAULT_MODEL_PROVIDER_LIST = [
   InternLMProvider,
   SiliconCloudProvider,
   GiteeAIProvider,
+  OAICompatibleProvider,
 ];
 
 export const filterEnabledModels = (provider: ModelProviderCard) => {
@@ -144,6 +147,7 @@ export { default as MistralProviderCard } from './mistral';
 export { default as MoonshotProviderCard } from './moonshot';
 export { default as NovitaProviderCard } from './novita';
 export { default as OllamaProviderCard } from './ollama';
+export { default as OAICompatibleProviderCard } from './oaicompatible';
 export { default as OpenAIProviderCard } from './openai';
 export { default as OpenRouterProviderCard } from './openrouter';
 export { default as PerplexityProviderCard } from './perplexity';

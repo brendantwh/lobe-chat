@@ -121,6 +121,9 @@ export const getLLMConfig = () => {
 
       ENABLED_INTERNLM: z.boolean(),
       INTERNLM_API_KEY: z.string().optional(),
+
+      ENABLED_OAICOMPATIBLE: z.boolean(),
+      OAICOMPATIBLE_API_KEY: z.string().optional(),
     },
     runtimeEnv: {
       API_KEY_SELECT_MODE: process.env.API_KEY_SELECT_MODE,
@@ -241,6 +244,9 @@ export const getLLMConfig = () => {
 
       ENABLED_INTERNLM: !!process.env.INTERNLM_API_KEY,
       INTERNLM_API_KEY: process.env.INTERNLM_API_KEY,
+
+      ENABLED: !!process.env.OAICOMPATIBLE,
+      OAICOMPATIBLE_API_KEY: process.env.OAICOMPATIBLE_API_KEY,
     },
   });
 };

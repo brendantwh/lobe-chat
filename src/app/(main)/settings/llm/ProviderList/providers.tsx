@@ -6,6 +6,7 @@ import {
   AnthropicProviderCard,
   BaichuanProviderCard,
   DeepSeekProviderCard,
+  OAICompatibleProviderCard,
   FireworksAIProviderCard,
   GiteeAIProviderCard,
   GoogleProviderCard,
@@ -55,6 +56,7 @@ export const useProviderList = (): ProviderItem[] => {
   return useMemo(
     () => [
       OpenAIProvider,
+      OAICompatibleProviderCard,
       AzureProvider,
       OllamaProvider,
       AnthropicProviderCard,
