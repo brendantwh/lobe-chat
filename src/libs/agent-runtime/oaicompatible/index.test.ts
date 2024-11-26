@@ -162,7 +162,7 @@ describe('LobeOAICompatible', () => {
         } catch (e) {
           expect(e).toEqual({
             endpoint: defaultBaseURL,
-            errorType: bizErrorType,
+            errorType: 'AgentRuntimeError',
             provider: provider,
             error: {
               name: genericError.name,
