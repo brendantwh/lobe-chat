@@ -316,7 +316,7 @@ const getLlmOptionsFromPayload = (provider: string, payload: JWTPayload) => {
       const { OAICOMPATIBLE_API_KEY } = getLLMConfig();
 
       const oaiCompatibleiApiKey = payload?.apiKey || OAICOMPATIBLE_API_KEY;
-      const baseURL = payload?.endpoint || process.env.OPENAI_PROXY_URL;
+      const baseURL = payload?.endpoint || process.env.OAICOMPATIBLE_PROXY_URL;
       const apiKey = apiKeyManager.pick(oaiCompatibleiApiKey);
 
       return { apiKey, baseURL };
