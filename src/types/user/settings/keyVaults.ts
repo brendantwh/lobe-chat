@@ -53,9 +53,9 @@ export interface UserKeyVaults {
   mistral?: OpenAICompatibleKeyVault;
   moonshot?: OpenAICompatibleKeyVault;
   novita?: OpenAICompatibleKeyVault;
+  oaicompatible?: OpenAICompatibleKeyVault;
   ollama?: OpenAICompatibleKeyVault;
   openai?: OpenAICompatibleKeyVault;
-  openaicompatible?: OpenAICompatibleKeyVault;
   openrouter?: OpenAICompatibleKeyVault;
   password?: string;
   perplexity?: OpenAICompatibleKeyVault;
