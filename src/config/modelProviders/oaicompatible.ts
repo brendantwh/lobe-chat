@@ -83,7 +83,7 @@ const OAICompatible: ModelProviderCard = {
         placeholder: 'http://127.0.0.1:1234/v1',
     },
     smoothing: {
-        speed: 2,
+        speed: 5,
         text: true,
     },
     url: 'https://openai.com',

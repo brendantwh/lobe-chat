@@ -221,6 +221,10 @@ const Github: ModelProviderCard = {
   // modelList: { showModelFetcher: true },
   name: 'GitHub',
   url: 'https://github.com/marketplace/models',
+  smoothing: {
+    speed: 5,
+    text: true,
+  },
 };
 
 export default Github;
