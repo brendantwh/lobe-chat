@@ -245,7 +245,7 @@ export const getLLMConfig = () => {
       ENABLED_INTERNLM: !!process.env.INTERNLM_API_KEY,
       INTERNLM_API_KEY: process.env.INTERNLM_API_KEY,
 
-      ENABLED: !!process.env.OAICOMPATIBLE,
+      ENABLED_OAICOMPATIBLE: !!process.env.OAICOMPATIBLE_API_KEY,
       OAICOMPATIBLE_API_KEY: process.env.OAICOMPATIBLE_API_KEY,
     },
   });
