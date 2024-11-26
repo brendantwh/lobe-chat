@@ -221,7 +221,7 @@ const Github: ModelProviderCard = {
   // modelList: { showModelFetcher: true },
   name: 'GitHub',
   smoothing: {
-    speed: 5,
+    speed: 4,
     text: true,
   },
   url: 'https://github.com/marketplace/models',
