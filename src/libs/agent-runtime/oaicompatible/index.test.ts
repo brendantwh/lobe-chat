@@ -3,7 +3,7 @@ import OpenAI from 'openai';
 import { Mock, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 // 引入模块以便于对函数进行spy
-import { ChatStreamCallbacks, LobeOpenAICompatibleRuntime, ModelProvider } from '@/libs/agent-runtime';
+import { LobeOpenAICompatibleRuntime, ModelProvider } from '@/libs/agent-runtime';
 
 import * as debugStreamModule from '../utils/debugStream';
 import { LobeOAICompatible } from './index';
@@ -215,5 +215,4 @@ describe('LobeOAICompatible', () => {
         process.env.DEBUG_OPENAI_CHAT_COMPLETION = originalDebugValue;
       });
     });
-  });
 });
