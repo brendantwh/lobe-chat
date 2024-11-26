@@ -150,8 +150,8 @@ class AgentRuntime {
       mistral: Partial<ClientOptions>;
       moonshot: Partial<ClientOptions>;
       novita: Partial<ClientOptions>;
-      ollama: Partial<ClientOptions>;
       oaicompatible: Partial<ClientOptions>;
+      ollama: Partial<ClientOptions>;
       openai: Partial<ClientOptions>;
       openrouter: Partial<ClientOptions>;
       perplexity: Partial<ClientOptions>;

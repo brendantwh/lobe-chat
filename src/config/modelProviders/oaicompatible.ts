@@ -1,5 +1,4 @@
 import { ModelProviderCard } from '@/types/llm';
-import { OAICompatibleProviderCard } from '.';
 
 // ref: https://platform.openai.com/docs/deprecations
 const OAICompatible: ModelProviderCard = {
