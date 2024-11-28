@@ -73,6 +73,16 @@ const OAICompatible: ModelProviderCard = {
             tokens: 128_000,
             vision: true,
         },
+        {
+            description:
+                'Gemini 1.5 Flash 是Google最新的多模态AI模型，具备快速处理能力，支持文本、图像和视频输入，适用于多种任务的高效扩展。',
+            displayName: 'Gemini 1.5 Flash (Web)',
+            enabled: true,
+            functionCall: true,
+            id: 'gemini-1.5-flash-online',
+            tokens: 4000,
+            vision: true,
+        },
     ],
     defaultShowBrowserRequest: true,
     id: 'oaicompatible',
