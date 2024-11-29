@@ -52,7 +52,7 @@ export const ragEvalRouter = router({
       const now = Date.now();
       try {
         const agentRuntime = await initAgentRuntimeWithUserPayload(
-          ModelProvider.Github,
+          ModelProvider.OpenAI,
           ctx.jwtPayload,
         );
 
