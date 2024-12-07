@@ -122,6 +122,9 @@ export const getLLMConfig = () => {
       ENABLED_INTERNLM: z.boolean(),
       INTERNLM_API_KEY: z.string().optional(),
 
+      ENABLED_HIGRESS: z.boolean(),
+      HIGRESS_API_KEY: z.string().optional(),
+
       ENABLED_OAICOMPATIBLE: z.boolean(),
       OAICOMPATIBLE_API_KEY: z.string().optional(),
     },
@@ -244,6 +247,9 @@ export const getLLMConfig = () => {
 
       ENABLED_INTERNLM: !!process.env.INTERNLM_API_KEY,
       INTERNLM_API_KEY: process.env.INTERNLM_API_KEY,
+
+      ENABLED_HIGRESS: !!process.env.HIGRESS_API_KEY,
+      HIGRESS_API_KEY: process.env.HIGRESS_API_KEY,
 
       ENABLED_OAICOMPATIBLE: !!process.env.OAICOMPATIBLE_API_KEY,
       OAICOMPATIBLE_API_KEY: process.env.OAICOMPATIBLE_API_KEY,

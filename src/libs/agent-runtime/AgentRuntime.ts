@@ -16,6 +16,7 @@ import { LobeGiteeAI } from './giteeai';
 import { LobeGithubAI } from './github';
 import { LobeGoogleAI } from './google';
 import { LobeGroq } from './groq';
+import { LobeHigressAI } from './higress';
 import { LobeHuggingFaceAI } from './huggingface';
 import { LobeHunyuanAI } from './hunyuan';
 import { LobeInternLMAI } from './internlm';
@@ -143,6 +144,7 @@ class AgentRuntime {
       github: Partial<ClientOptions>;
       google: { apiKey?: string; baseURL?: string };
       groq: Partial<ClientOptions>;
+      higress: Partial<ClientOptions>;
       huggingface: { apiKey?: string; baseURL?: string };
       hunyuan: Partial<ClientOptions>;
       internlm: Partial<ClientOptions>;
@@ -354,6 +356,11 @@ class AgentRuntime {
 
       case ModelProvider.InternLM: {
         runtimeModel = new LobeInternLMAI(params.internlm);
+        break;
+      }
+
+      case ModelProvider.Higress: {
+        runtimeModel = new LobeHigressAI(params.higress);
         break;
       }
     }

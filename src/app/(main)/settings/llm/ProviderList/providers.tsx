@@ -11,6 +11,7 @@ import {
   GiteeAIProviderCard,
   GoogleProviderCard,
   GroqProviderCard,
+  HigressProviderCard,
   HunyuanProviderCard,
   InternLMProviderCard,
   MinimaxProviderCard,
@@ -91,6 +92,7 @@ export const useProviderList = (): ProviderItem[] => {
       TaichuProviderCard,
       InternLMProviderCard,
       SiliconCloudProviderCard,
+      HigressProviderCard,
       GiteeAIProviderCard,
     ],
     [
