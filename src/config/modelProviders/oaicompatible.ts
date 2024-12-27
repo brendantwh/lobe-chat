@@ -15,7 +15,7 @@ const OAICompatible: ModelProviderCard = {
                 output: 12,
             },
             releasedAt: '2024-09-12',
-            tokens: 128_000,
+            contextWindowTokens: 128_000,
         },
         {
             description:
@@ -29,7 +29,7 @@ const OAICompatible: ModelProviderCard = {
                 output: 60,
             },
             releasedAt: '2024-09-12',
-            tokens: 128_000,
+            contextWindowTokens: 128_000,
         },
         {
             description:
@@ -43,7 +43,7 @@ const OAICompatible: ModelProviderCard = {
                 input: 0.15,
                 output: 0.6,
             },
-            tokens: 128_000,
+            contextWindowTokens: 128_000,
             vision: true,
         },
         {
@@ -57,7 +57,7 @@ const OAICompatible: ModelProviderCard = {
                 input: 2.5,
                 output: 10,
             },
-            tokens: 128_000,
+            contextWindowTokens: 128_000,
             vision: true,
         },
         {
@@ -70,7 +70,7 @@ const OAICompatible: ModelProviderCard = {
                 input: 5,
                 output: 15,
             },
-            tokens: 128_000,
+            contextWindowTokens: 128_000,
             vision: true,
         },
         {
@@ -80,7 +80,7 @@ const OAICompatible: ModelProviderCard = {
             enabled: true,
             functionCall: true,
             id: 'gemini-1.5-flash-online',
-            tokens: 4000,
+            contextWindowTokens: 4000,
             vision: true,
         },
     ],
@@ -93,7 +93,7 @@ const OAICompatible: ModelProviderCard = {
         placeholder: 'http://127.0.0.1:1234/v1',
     },
     smoothing: {
-        speed: 4,
+        speed: 5,
         text: true,
     },
     url: 'https://openai.com',
