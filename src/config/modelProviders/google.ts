@@ -278,7 +278,7 @@ const Google: ModelProviderCard = {
     placeholder: 'https://generativelanguage.googleapis.com',
   },
   smoothing: {
-    speed: 5,
+    speed: 4,
     text: true,
   },
   url: 'https://ai.google.dev',

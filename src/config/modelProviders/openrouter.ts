@@ -221,6 +221,10 @@ const OpenRouter: ModelProviderCard = {
   modelList: { showModelFetcher: true },
   modelsUrl: 'https://openrouter.ai/models',
   name: 'OpenRouter',
+  smoothing: {
+    speed: 4,
+    text: true,
+  },
   url: 'https://openrouter.ai',
 };
 
