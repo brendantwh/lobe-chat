@@ -92,6 +92,10 @@ const OAICompatible: ModelProviderCard = {
     proxyUrl: {
         placeholder: 'http://127.0.0.1:1234/v1',
     },
+    settings: {
+        sdkType: 'openai',
+        showModelFetcher: true,
+    },
     smoothing: {
         speed: 4,
         text: true,
