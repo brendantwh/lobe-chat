@@ -109,7 +109,7 @@ const getLlmOptionsFromPayload = (provider: string, payload: JWTPayload) => {
       const { XAI_API_KEY } = getLLMConfig();
 
       const apiKey = apiKeyManager.pick(payload?.apiKey || XAI_API_KEY);
-      const baseURL = payload?.endpoint || process.env.XAI_PROXY_URL;
+      const baseURL = payload?.baseURL || process.env.XAI_PROXY_URL;
 
       return { apiKey, baseURL };
     }
@@ -124,7 +124,7 @@ const getLlmOptionsFromPayload = (provider: string, payload: JWTPayload) => {
       const { OAICOMPATIBLE_API_KEY } = getLLMConfig();
 
       const oaiCompatibleiApiKey = payload?.apiKey || OAICOMPATIBLE_API_KEY;
-      const baseURL = payload?.endpoint || process.env.OAICOMPATIBLE_PROXY_URL;
+      const baseURL = payload?.baseURL || process.env.OAICOMPATIBLE_PROXY_URL;
       const apiKey = apiKeyManager.pick(oaiCompatibleiApiKey);
 
       return { apiKey, baseURL };
