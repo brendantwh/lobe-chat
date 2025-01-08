@@ -302,6 +302,10 @@ const OpenAI: ModelProviderCard = {
   settings: {
     showModelFetcher: true,
   },
+  smoothing: {
+    speed: 4,
+    text: true,
+  },
   url: 'https://openai.com',
 };
 

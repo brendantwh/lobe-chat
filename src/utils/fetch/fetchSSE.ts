@@ -62,6 +62,7 @@ const createSmoothMessage = (params: {
   let outputQueue: string[] = [];
   let isAnimationActive = false;
   let animationFrameId: number | null = null;
+  const WHITESPACE_THRESHOLD = 2;
 
   // when you need to stop the animation, call this function
   const stopAnimation = () => {
@@ -95,12 +96,27 @@ const createSmoothMessage = (params: {
         // 如果还有文本没有显示
         // 检查队列中是否有字符待显示
         if (outputQueue.length > 0) {
-          // 从队列中获取前 n 个字符（如果存在）
-          const charsToAdd = outputQueue.splice(0, speed).join('');
-          buffer += charsToAdd;
+          // Check for large whitespace blocks
+          let consecutiveSpaces = 0;
+          for (const char of outputQueue) {
+            if (/\s/.test(char)) consecutiveSpaces++;
+            else break;
+          }
 
-          // 更新消息内容，这里可能需要结合实际情况调整
-          params.onTextUpdate(charsToAdd, buffer);
+          if (consecutiveSpaces > WHITESPACE_THRESHOLD) {
+            // Skip the whole whitespace block
+            const whitespace = outputQueue.splice(0, consecutiveSpaces).join('');
+            buffer += whitespace;
+            
+            params.onTextUpdate(whitespace, buffer);
+          } else {
+            // 从队列中获取前 n 个字符（如果存在）
+            const charsToAdd = outputQueue.splice(0, speed).join('');
+            buffer += charsToAdd;
+            
+            // 更新消息内容，这里可能需要结合实际情况调整
+            params.onTextUpdate(charsToAdd, buffer);
+          }
         } else {
           // 当所有字符都显示完毕时，清除动画状态
           isAnimationActive = false;

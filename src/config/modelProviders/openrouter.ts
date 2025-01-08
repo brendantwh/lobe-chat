@@ -240,6 +240,10 @@ const OpenRouter: ModelProviderCard = {
     sdkType: 'openai',
     showModelFetcher: true,
   },
+  smoothing: {
+    speed: 4,
+    text: true,
+  },
   url: 'https://openrouter.ai',
 };
 

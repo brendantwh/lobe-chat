@@ -235,6 +235,10 @@ const Github: ModelProviderCard = {
     sdkType: 'azure',
     showModelFetcher: true,
   },
+  smoothing: {
+    speed: 4,
+    text: true,
+  },
   url: 'https://github.com/marketplace/models',
 };
 

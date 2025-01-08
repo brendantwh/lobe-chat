@@ -289,7 +289,7 @@ const Google: ModelProviderCard = {
     },
   },
   smoothing: {
-    speed: 2,
+    speed: 4,
     text: true,
   },
   url: 'https://ai.google.dev',
