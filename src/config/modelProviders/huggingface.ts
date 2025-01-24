@@ -63,6 +63,10 @@ const HuggingFace: ModelProviderCard = {
     sdkType: 'huggingface',
     showModelFetcher: true,
   },
+  smoothing: {
+    speed: 3.5,
+    text: true,
+  },
   url: 'https://huggingface.co',
 };
 
