@@ -50,10 +50,14 @@ const huggingfaceChatModels: AIChatModelCard[] = [
     type: 'chat',
   },
   {
+    abilities: {
+      reasoning: true,
+    },
     contextWindowTokens: 16_384,
     displayName: 'DeepSeek R1',
     enabled: true,
     id: 'deepseek-ai/DeepSeek-R1-Distill-Qwen-32B',
+    releasedAt: '2025-01-20',
     type: 'chat',
   },
 ];
