@@ -1,5 +1,39 @@
 [
   {
+    "children": {
+      "fixes": ["Try to fix discover error."]
+    },
+    "date": "2025-02-06",
+    "version": "1.51.6"
+  },
+  {
+    "children": {
+      "improvements": ["Add siliconcloud models."]
+    },
+    "date": "2025-02-06",
+    "version": "1.51.5"
+  },
+  {
+    "children": {},
+    "date": "2025-02-06",
+    "version": "1.51.4"
+  },
+  {
+    "children": {
+      "improvements": ["Add Cache, Metadata, FeatureFlag Viewer to DevPanel."],
+      "fixes": ["Artifact Parsing and Rendering Bug Fix for Gemini 2.0 Flash."]
+    },
+    "date": "2025-02-05",
+    "version": "1.51.3"
+  },
+  {
+    "children": {
+      "improvements": ["Update model list, add reasoning tag."]
+    },
+    "date": "2025-02-05",
+    "version": "1.51.2"
+  },
+  {
     "children": {},
     "date": "2025-02-05",
     "version": "1.51.1"
