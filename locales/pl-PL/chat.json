@@ -32,13 +32,21 @@
   "duplicateTitle": "{{title}} kopia",
   "emptyAgent": "Brak asystenta",
   "extendParams": {
+    "disableContextCaching": {
+      "desc": "Koszt generowania pojedynczej rozmowy może zostać obniżony o 90%, a prędkość odpowiedzi wzrośnie czterokrotnie (<1>Dowiedz się więcej</1>). Po włączeniu automatycznie wyłączone zostanie ograniczenie liczby wiadomości historycznych",
+      "title": "Włącz pamięć kontekstową"
+    },
     "enableReasoning": {
+      "desc": "Ograniczenia oparte na mechanizmie Claude Thinking (<1>Dowiedz się więcej</1>), po włączeniu automatycznie wyłączone zostanie ograniczenie liczby wiadomości historycznych",
       "title": "Włącz głębokie myślenie"
     },
     "reasoningBudgetToken": {
       "title": "Token zużycia myślenia"
     },
     "title": "Funkcje rozszerzenia modelu"
+  },
+  "history": {
+    "title": "Asystent zapamięta tylko ostatnie {{count}} wiadomości"
   },
   "historyRange": "Zakres historii",
   "historySummary": "Podsumowanie wiadomości historycznych",
@@ -89,16 +97,20 @@
         "inputCharts": "${{amount}}/M znaków",
         "inputMinutes": "${{amount}}/minutę",
         "inputTokens": "Wejście {{amount}}/punktów · ${{amount}}/M",
-        "outputTokens": "Wyjście {{amount}}/punktów · ${{amount}}/M"
+        "outputTokens": "Wyjście {{amount}}/punktów · ${{amount}}/M",
+        "writeCacheInputTokens": "Zapisz wejście w pamięci podręcznej {{amount}}/punktów · ${{amount}}/M"
       }
     },
     "tokenDetails": {
+      "average": "Średnia cena",
       "input": "Wejście",
       "inputAudio": "Wejście audio",
       "inputCached": "Zbuforowane wejście",
+      "inputCitation": "Cytowanie wejścia",
       "inputText": "Wejście tekstowe",
       "inputTitle": "Szczegóły wejścia",
       "inputUncached": "Wejście niezbuforowane",
+      "inputWriteCached": "Zapisz wejście w pamięci podręcznej",
       "output": "Wyjście",
       "outputAudio": "Wyjście audio",
       "outputText": "Wyjście tekstowe",

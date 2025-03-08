@@ -32,13 +32,21 @@
   "duplicateTitle": "{{title}} のコピー",
   "emptyAgent": "エージェントがいません",
   "extendParams": {
+    "disableContextCaching": {
+      "desc": "単一の対話生成コストは最大90%削減され、応答速度は4倍向上します（<1>詳細はこちら</1>）。有効にすると、過去のメッセージ数制限が自動的に無効になります。",
+      "title": "コンテキストキャッシュを有効にする"
+    },
     "enableReasoning": {
+      "desc": "Claude Thinkingメカニズムに基づく制限（<1>詳細はこちら</1>）により、有効にすると過去のメッセージ数制限が自動的に無効になります。",
       "title": "深い思考を有効にする"
     },
     "reasoningBudgetToken": {
       "title": "思考消費トークン"
     },
     "title": "モデル拡張機能"
+  },
+  "history": {
+    "title": "アシスタントは最後の{{count}}件のメッセージのみを記憶します"
   },
   "historyRange": "履歴範囲",
   "historySummary": "履歴メッセージの要約",
@@ -89,16 +97,20 @@
         "inputCharts": "${{amount}}/M 文字",
         "inputMinutes": "${{amount}}/分",
         "inputTokens": "入力 {{amount}}/クレジット · ${{amount}}/M",
-        "outputTokens": "出力 {{amount}}/クレジット · ${{amount}}/M"
+        "outputTokens": "出力 {{amount}}/クレジット · ${{amount}}/M",
+        "writeCacheInputTokens": "キャッシュ入力の書き込み {{amount}}/ポイント · ${{amount}}/M"
       }
     },
     "tokenDetails": {
+      "average": "平均単価",
       "input": "入力",
       "inputAudio": "音声入力",
       "inputCached": "キャッシュ入力",
+      "inputCitation": "引用入力",
       "inputText": "テキスト入力",
       "inputTitle": "入力の詳細",
       "inputUncached": "未キャッシュ入力",
+      "inputWriteCached": "入力キャッシュ書き込み",
       "output": "出力",
       "outputAudio": "音声出力",
       "outputText": "テキスト出力",
