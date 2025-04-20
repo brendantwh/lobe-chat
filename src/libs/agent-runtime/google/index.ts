@@ -80,6 +80,10 @@ interface LobeGoogleAIParams {
   isVertexAi?: boolean;
 }
 
+interface GoogleAIThinkingConfig {
+  thinkingBudget?: number;
+}
+
 export class LobeGoogleAI implements LobeRuntimeAI {
   private client: GoogleGenerativeAI;
   private isVertexAi: boolean;
@@ -102,7 +106,11 @@ export class LobeGoogleAI implements LobeRuntimeAI {
   async chat(rawPayload: ChatStreamPayload, options?: ChatCompetitionOptions) {
     try {
       const payload = this.buildPayload(rawPayload);
-      const model = payload.model;
+      const { model, thinking } = payload;
+
+      const thinkingConfig: GoogleAIThinkingConfig = {
+        thinkingBudget: thinking?.type === 'enabled' ? Math.min(thinking.budget_tokens, 24_576) : 0,
+      };
 
       const contents = await this.buildGoogleMessages(payload.messages);
 
@@ -114,6 +122,7 @@ export class LobeGoogleAI implements LobeRuntimeAI {
               // @ts-expect-error - Google SDK 0.24.0 doesn't have this property for now with
               response_modalities: modelsWithModalities.has(model) ? ['Text', 'Image'] : undefined,
               temperature: payload.temperature,
+              thinkingConfig,
               topP: payload.top_p,
             },
             model,
@@ -368,7 +377,7 @@ export class LobeGoogleAI implements LobeRuntimeAI {
     payload?: ChatStreamPayload,
   ): GoogleFunctionCallTool[] | undefined {
     // 目前 Tools (例如 googleSearch) 无法与其他 FunctionCall 同时使用
-    if (payload?.messages?.some(m => m.tool_calls?.length)) {
+    if (payload?.messages?.some((m) => m.tool_calls?.length)) {
       return; // 若历史消息中已有 function calling，则不再注入任何 Tools
     }
     if (payload?.enabledSearch) {
