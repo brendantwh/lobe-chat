@@ -6,6 +6,10 @@ on:
       version:
         description: 'Version to build'
         required: true
+  push:
+    branches:
+      - smoothing
+      - gemini-thinking
 
 # 确保同一时间只运行一个相同的 workflow，取消正在进行的旧的运行
 concurrency:
@@ -48,7 +52,7 @@ jobs:
     outputs:
       # 输出版本信息，供后续 job 使用
       version: ${{ steps.set_version.outputs.version }}
-      is_pr_build: ${{ steps.set_version.outputs.is_pr_build }}
+      is_pr_build: false
     steps:
       - uses: actions/checkout@v4
         with:
@@ -63,17 +67,28 @@ jobs:
       - name: Set version
         id: set_version
         run: |
-          # Workflow dispatch 事件使用输入的 version
-          version="${{ github.event.inputs.version }}"
-          echo "📦 Workflow Dispatch Input Version: ${version}"
+          version=""
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            # Workflow dispatch version
+            version="${{ github.event.inputs.version }}"
+            echo "📦 Workflow Dispatch Input Version: ${version}"
+          elif [[ "${{ github.event_name }}" == "push" ]]; then
+            # Using first 7 chars of the SHA prefixed with 'dev-'
+            version="dev-${{ github.sha::7 }}"
+            echo "📦 Push Event Auto Version: ${version}"
+          else
+            echo "::error::Unsupported trigger event: ${{ github.event_name }}"
+            exit 1
+          fi
 
           if [[ -z "$version" ]]; then
-            echo "::error::Version input cannot be empty."
+            echo "::error::Version could not be determined."
             exit 1
           fi
 
           echo "version=${version}" >> $GITHUB_OUTPUT
-          echo "📦 Release Version: ${version}"
+          # Setting is_pr_build to false
+          echo "is_pr_build=false" >> $GITHUB_OUTPUT
 
       # 输出版本信息总结，方便在 GitHub Actions 界面查看
       - name: Version Summary
@@ -150,38 +165,3 @@ jobs:
             apps/desktop/release/*.exe*
             apps/desktop/release/*.AppImage
           retention-days: 5
-
-  # 正式版发布 job
-  publish-release:
-    needs: [build, version]
-    name: Publish Beta Release
-    runs-on: ubuntu-latest
-    # Grant write permission to contents for uploading release assets
-    permissions:
-      contents: write
-    steps:
-      # 下载所有平台的构建产物
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: release
-          pattern: release-*
-          merge-multiple: true
-
-      # 列出所有构建产物
-      - name: List artifacts
-        run: ls -R release
-
-      # 将构建产物上传到现有 release
-      - name: Upload to Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ needs.version.outputs.version }}
-          files: |
-            release/latest*
-            release/*.dmg*
-            release/*.zip*
-            release/*.exe*
-            release/*.AppImage
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
