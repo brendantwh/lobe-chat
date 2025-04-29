@@ -1,6 +1,11 @@
 name: Release Desktop Beta
 
 on:
+  workflow_dispatch:
+  push:
+    branches:
+      - smoothing
+      - gemini-thinking
   release:
     types: [published] # 发布 release 时触发构建
 

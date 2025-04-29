@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - smoothing
+      - gemini-thinking
   release:
     types: [published]
   pull_request:
