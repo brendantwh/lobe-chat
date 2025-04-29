@@ -78,7 +78,7 @@ jobs:
             echo "📦 Workflow Dispatch Input Version: ${version}"
           elif [[ "${{ github.event_name }}" == "push" ]]; then
             # Using first 7 chars of the SHA prefixed with 'dev-'
-            version="${{ steps.slug.outputs.sha7 }}"
+            version="0.0.0-dev-${{ steps.slug.outputs.sha7 }}"
             echo "📦 Push Event Auto Version: ${version}"
           else
             echo "::error::Unsupported trigger event: ${{ github.event_name }}"
@@ -146,16 +146,16 @@ jobs:
           CUSTOM_FONT_URL: ${{ secrets.CUSTOM_FONT_URL }}
           CUSTOM_FONT_FAMILY: ${{ secrets.CUSTOM_FONT_FAMILY }}
 
-      # 非 macOS 平台构建处理
-      - name: Build artifact on other platforms
-        if: runner.os != 'macOS'
-        run: npm run desktop:build
-        env:
-          APP_URL: http://localhost:3015
-          DATABASE_URL: 'postgresql://postgres@localhost:5432/postgres'
-          KEY_VAULTS_SECRET: 'oLXWIiR/AKF+rWaqy9lHkrYgzpATbW3CtJp3UfkVgpE='
-          CUSTOM_FONT_URL: ${{ secrets.CUSTOM_FONT_URL }}
-          CUSTOM_FONT_FAMILY: ${{ secrets.CUSTOM_FONT_FAMILY }}
+      # # 非 macOS 平台构建处理
+      # - name: Build artifact on other platforms
+      #   if: runner.os != 'macOS'
+      #   run: npm run desktop:build
+      #   env:
+      #     APP_URL: http://localhost:3015
+      #     DATABASE_URL: 'postgresql://postgres@localhost:5432/postgres'
+      #     KEY_VAULTS_SECRET: 'oLXWIiR/AKF+rWaqy9lHkrYgzpATbW3CtJp3UfkVgpE='
+      #     CUSTOM_FONT_URL: ${{ secrets.CUSTOM_FONT_URL }}
+      #     CUSTOM_FONT_FAMILY: ${{ secrets.CUSTOM_FONT_FAMILY }}
 
       # 上传构建产物，移除了 zip 相关部分
       - name: Upload artifact
