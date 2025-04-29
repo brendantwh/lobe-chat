@@ -2,12 +2,10 @@ name: Release Desktop Beta
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - smoothing
-      - gemini-thinking
-  release:
-    types: [published] # 发布 release 时触发构建
+    inputs:
+      version:
+        description: 'Version to build'
+        required: true
 
 # 确保同一时间只运行一个相同的 workflow，取消正在进行的旧的运行
 concurrency:
@@ -65,12 +63,15 @@ jobs:
       - name: Set version
         id: set_version
         run: |
-          # 从 apps/desktop/package.json 读取基础版本号
-          base_version=$(node -p "require('./apps/desktop/package.json').version")
+          # Workflow dispatch 事件使用输入的 version
+          version="${{ github.event.inputs.version }}"
+          echo "📦 Workflow Dispatch Input Version: ${version}"
 
-          # Release 事件直接使用 release tag 作为版本号，去掉可能的 v 前缀
-          version="${{ github.event.release.tag_name }}"
-          version="${version#v}"
+          if [[ -z "$version" ]]; then
+            echo "::error::Version input cannot be empty."
+            exit 1
+          fi
+
           echo "version=${version}" >> $GITHUB_OUTPUT
           echo "📦 Release Version: ${version}"
 
@@ -158,8 +159,6 @@ jobs:
     # Grant write permission to contents for uploading release assets
     permissions:
       contents: write
-    outputs:
-      artifact_path: ${{ steps.set_path.outputs.path }}
     steps:
       # 下载所有平台的构建产物
       - name: Download artifacts
@@ -177,7 +176,7 @@ jobs:
       - name: Upload to Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.event.release.tag_name }}
+          tag_name: v${{ needs.version.outputs.version }}
           files: |
             release/latest*
             release/*.dmg*
