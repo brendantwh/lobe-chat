@@ -63,6 +63,10 @@ jobs:
         with:
           node-version: 22
 
+      - name: Get short SHA
+        id: slug
+        run: echo "::set-output name=sha7::$(echo ${GITHUB_SHA} | cut -c1-7)"
+      
       # 主要逻辑：确定构建版本号
       - name: Set version
         id: set_version
@@ -74,7 +78,7 @@ jobs:
             echo "📦 Workflow Dispatch Input Version: ${version}"
           elif [[ "${{ github.event_name }}" == "push" ]]; then
             # Using first 7 chars of the SHA prefixed with 'dev-'
-            version="dev-${{ github.sha::7 }}"
+            version="${{ steps.slug.outputs.sha7 }}"
             echo "📦 Push Event Auto Version: ${version}"
           else
             echo "::error::Unsupported trigger event: ${{ github.event_name }}"
