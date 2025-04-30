@@ -1,6 +1,7 @@
 import { MainBroadcastEventKey, MainBroadcastParams } from '@lobechat/electron-client-ipc';
 import { BrowserWindow, BrowserWindowConstructorOptions, ipcMain } from 'electron';
 import { join } from 'node:path';
+import url from 'node:url';
 
 import { createLogger } from '@/utils/logger';
 
@@ -210,9 +211,61 @@ export default class Browser {
     this._browserWindow = browserWindow;
     logger.debug(`[${this.identifier}] BrowserWindow instance created.`);
 
+    // --- CSP Modification Start ---
+    const session = browserWindow.webContents.session;
+    session.webRequest.onHeadersReceived((details, callback) => {
+      const headers = details.responseHeaders || {};
+      // Ensure header keys are consistently lowercase for matching
+      const lowerCaseHeaders = Object.keys(headers).reduce((acc, key) => {
+        acc[key.toLowerCase()] = headers[key];
+        return acc;
+      }, {} as Record<string, string | string[]>);
+
+      const cspHeader = lowerCaseHeaders['content-security-policy'];
+      let csp = Array.isArray(cspHeader) ? cspHeader[0] : cspHeader || "";
+
+      let fontOrigin = '';
+      // Ensure CUSTOM_FONT_URL is available in the main process environment
+      if (process.env.CUSTOM_FONT_URL) {
+        try {
+          const parsedUrl = new url.URL(process.env.CUSTOM_FONT_URL);
+          fontOrigin = parsedUrl.origin;
+          logger.debug(`[${this.identifier}] Parsed font origin for CSP: ${fontOrigin}`);
+        } catch (e) {
+          logger.error(`[${this.identifier}] Error parsing CUSTOM_FONT_URL for CSP:`, e);
+        }
+      } else {
+         logger.debug(`[${this.identifier}] CUSTOM_FONT_URL not found in environment for CSP modification.`);
+      }
+
+      if (fontOrigin) {
+        // More robustly add to style-src
+        if (csp.includes('style-src')) {
+          // Avoid adding if already present
+          if (!csp.includes(fontOrigin)) {
+             csp = csp.replace(/style-src[^;]*/, `$& ${fontOrigin}`);
+             logger.debug(`[${this.identifier}] Added ${fontOrigin} to existing style-src CSP.`);
+          } else {
+             logger.debug(`[${this.identifier}] Font origin ${fontOrigin} already in style-src CSP.`);
+          }
+        } else {
+          // Add style-src directive if it doesn't exist
+          csp += `; style-src 'self' ${fontOrigin}`;
+           logger.debug(`[${this.identifier}] Added new style-src CSP directive for ${fontOrigin}.`);
+        }
+      }
+
+      // Update the header (use the original case if possible, otherwise add it)
+      const originalCspKey = Object.keys(headers).find(key => key.toLowerCase() === 'content-security-policy') || 'Content-Security-Policy';
+      headers[originalCspKey] = [csp];
+
+      callback({ responseHeaders: headers });
+    });
+    // --- CSP Modification End ---
+
     logger.debug(`[${this.identifier}] Setting up nextInterceptor.`);
     this.stopInterceptHandler = this.app.nextInterceptor({
-      session: browserWindow.webContents.session,
+      session: session,
     });
 
     // Windows 11 can use this new API
